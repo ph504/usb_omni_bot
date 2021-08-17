@@ -27,8 +27,8 @@ alpha2 = math.radians(120)
 
 # the rolling constraint matrix from each wheel. (read the report for more detail)
 J1 = np.array([[math.sin(alpha0), -math.cos(alpha0), -CHASSIS_AXLE_LENGTH],
-                   [math.sin(alpha1), -math.cos(alpha1), -CHASSIS_AXLE_LENGTH],
-                   [math.sin(alpha2), -math.cos(alpha2), -CHASSIS_AXLE_LENGTH]])
+               [math.sin(alpha1), -math.cos(alpha1), -CHASSIS_AXLE_LENGTH],
+               [math.sin(alpha2), -math.cos(alpha2), -CHASSIS_AXLE_LENGTH]])
 
 def rotation_matrix(theta):
     return np.array([[math.cos(theta), math.sin(theta),     0   ],
@@ -36,9 +36,9 @@ def rotation_matrix(theta):
                      [       0       ,         0      ,     1   ]])
         
                      
-def inverse_kinematic(wheel_radius, theta, xi_dot):
+def inverse_kinematic(theta, xi_dot):
     R = rotation_matrix(theta)
-    phi_dot = (1/wheel_radius) * np.matmul(np.matmul(J1,R),xi_dot)
+    phi_dot = (1/WHEEL_RADIUS) * np.matmul(np.matmul(J1,R),xi_dot)
     return phi_dot
 
 def calc_destance_from_line(l1, l2, p3):
